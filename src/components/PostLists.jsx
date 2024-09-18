@@ -6,7 +6,8 @@ import { ReactionButtons } from '../features/ReactionButtons';
 
 export const PostsList = () => {
     const currentUser = useSelector(selectCurrentUsername);
-    const posts = useSelector(state => selectUserById(state,currentUser));
+    const posts1 = useSelector(state => selectUserById(state,currentUser));
+    const posts = useSelector(selectCurrentUser);
     console.log("currentUser = ", posts);
 
     if (!posts) {
