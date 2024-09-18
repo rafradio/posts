@@ -2,6 +2,7 @@ import { useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux';
 import { selectPost } from '../store/selectors';
 import { ReactionButtons } from '../features/ReactionButtons';
+import { Navbar } from './NavBar';
 
 export const SinglePostPage = () => {
     const { postId } = useParams()
@@ -16,13 +17,16 @@ export const SinglePostPage = () => {
       }
     
       return (
-        <section>
-          <article className="post">
-            <h2>{post.title}</h2>
-            <p className="post-content">{post.content}</p>
-            <ReactionButtons post={post} />
-          </article>
-        </section>
+        <>
+          <Navbar />
+          <section>
+            <article className="post">
+              <h2>{post.title}</h2>
+              <p className="post-content">{post.content}</p>
+              <ReactionButtons post={post} />
+            </article>
+          </section>
+        </>
       )
 }
 

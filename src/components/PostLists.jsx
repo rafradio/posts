@@ -1,14 +1,25 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { selectPosts } from '../store/selectors';
+import { selectPosts, selectUserById, selectCurrentUser } from '../store/selectors';
+import { selectCurrentUsername } from '../store/selectors';
 import { Link } from 'react-router-dom'
 import { ReactionButtons } from '../features/ReactionButtons';
 
 export const PostsList = () => {
-    const posts = useSelector(selectPosts);
+    const currentUser = useSelector(selectCurrentUsername);
+    const posts = useSelector(state => selectUserById(state,currentUser));
+    console.log("currentUser = ", posts);
 
-    const orderedPosts = posts.slice().sort((a, b) => b.date.localeCompare(a.date))
+    if (!posts) {
+      return (
+        <section>
+          <h2>Post not found!</h2>
+        </section>
+      )
+    }
 
-    const renderedPosts = orderedPosts.map(post => (
+    // const orderedPosts = posts.slice().sort((a, b) => b.date.localeCompare(a.date))
+
+    const renderedPosts = posts.map(post => (
         <article className="post-excerpt" key={post.id}>
           <h3>
             <Link to={`/posts/${post.id}`}>{post.title}</Link>
