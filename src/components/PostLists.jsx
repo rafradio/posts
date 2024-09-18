@@ -3,6 +3,7 @@ import { selectPosts, selectUserById, selectCurrentUser } from '../store/selecto
 import { selectCurrentUsername } from '../store/selectors';
 import { Link } from 'react-router-dom'
 import { ReactionButtons } from '../features/ReactionButtons';
+import { PostAuthor } from './PostAuthor';
 
 export const PostsList = () => {
     const currentUser = useSelector(selectCurrentUsername);
@@ -25,6 +26,7 @@ export const PostsList = () => {
           <h3>
             <Link to={`/posts/${post.id}`}>{post.title}</Link>
           </h3>
+          <PostAuthor userId={post.user} />
           <p className="post-content">{post.content.substring(0, 100)}</p>
           <ReactionButtons post={post} />
         </article>

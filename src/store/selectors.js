@@ -7,8 +7,9 @@ const selectCurrentUser = state => {
     const currentUsername = selectCurrentUsername(state);
     return selectUserById(state, currentUsername);
 }
+const selectCurrentAuthor = (state, userId) => state.users.find(user => user.id == userId)
 
 export { selectPosts, selectPost, selectUserById };
-export { selectAllUsers };
+export { selectAllUsers, selectCurrentAuthor };
 export { selectCurrentUsername, selectCurrentUser };
 
