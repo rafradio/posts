@@ -22,7 +22,7 @@ export const ReactionButtons = (props) => {
                   type="button"
                   className="muted-button reaction-button"
                   onClick={() => {
-                        console.log("hello button = ", postId);
+                        console.log("hello button = ");
                         dispatch(reactionAdded({ postId, reaction }));
 
                     }

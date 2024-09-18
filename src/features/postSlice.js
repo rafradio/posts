@@ -40,12 +40,9 @@ const postsSlice = createSlice({
             }
         },
         reactionAdded: (state, action) => {
-            
             const { postId, reaction } = action.payload
-            console.log("hello from reducer button = ", postId);
             const existingPost = state.find(post => post.id === postId)
             if (existingPost) {
-                console.log("find post from button");
                 existingPost.reactions[reaction]++
               }
         }
