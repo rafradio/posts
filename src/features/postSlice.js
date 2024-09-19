@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { nanoid } from '@reduxjs/toolkit'
 import { sub } from 'date-fns'
+import { userLoggedOut } from './auth/authSlice'
 
 const initialReactions = {
     thumbsUp: 0,
@@ -28,7 +29,7 @@ const postsSlice = createSlice({
             },
             prepare(title, content, userId) {
                 return {
-                  payload: { id: nanoid(), date: new Date().toISOString(), title, content, user: userId, reactions: initialReactions, }
+                  payload: { id: nanoid(), title, user: userId, content, date: new Date().toISOString(), reactions: initialReactions, }
                 }
               }
         },
@@ -47,7 +48,12 @@ const postsSlice = createSlice({
                 existingPost.reactions[reaction]++
               }
         }
-    }
+    },
+    // extraReducers: (builder) => {
+    //     builder.addCase(userLoggedOut, (state) => {
+    //         return []
+    //     })
+    // },
 });
 
 export const { postAdded, postUpdated, reactionAdded } = postsSlice.actions

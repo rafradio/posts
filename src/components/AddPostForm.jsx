@@ -3,10 +3,13 @@ import { nanoid } from '@reduxjs/toolkit'
 import { useDispatch, useSelector } from 'react-redux';
 import { postAdded } from '../features/postSlice';
 import { selectAllUsers } from '../store/selectors';
+import { selectCurrentAuthor } from '../store/selectors';
 
 export const AddPostForm = () => {
     const dispatch = useDispatch();
     const users = useSelector(selectAllUsers);
+    const userId = useSelector(selectCurrentAuthor);
+    console.log('UserID post form = : ', userId);
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -14,6 +17,7 @@ export const AddPostForm = () => {
         const { elements } = e.currentTarget
         const title = elements.postTitle.value
         const content = elements.postContent.value
+        console.log('Values: ', userId);
 
         // console.log('Values: ', { title, content });
         // const newPost = {
@@ -21,7 +25,7 @@ export const AddPostForm = () => {
         //     title,
         //     content
         // }
-        dispatch(postAdded(title, content))
+        dispatch(postAdded(title, content, userId.id))
 
         e.currentTarget.reset()
     }
